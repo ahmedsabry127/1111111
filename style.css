@@ -1,0 +1,801 @@
+/* Reset & base styles */
+body {
+    font-family: 'Cairo', 'Tajawal', 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e3f0ff 0%, #f9f9f9 100%);
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    unicode-bidi: plaintext;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    color: #222;
+}
+#container {
+    width: 100vw;
+    min-height: 100vh;
+    background: #fff;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 8px 32px #0002, 0 1.5px 4px #2196f333;
+    padding: 48px 4vw 48px 4vw;
+    margin-top: 0;
+    transition: box-shadow 0.2s;
+}
+h2 {
+    text-align: center;
+    font-size: 2.7em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #1976d2;
+    margin-bottom: 18px;
+}
+#breadcrumb {
+    margin-bottom: 18px;
+    background: #f5f7fa;
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 1.35em;
+    box-shadow: 0 1px 4px #0001;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+#breadcrumb span {
+    color: #1976d2;
+    transition: color 0.2s;
+}
+#breadcrumb span:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+}
+#folders {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.folder, .subfolder {
+    padding: 22px 28px;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 0;
+    background: linear-gradient(90deg, #f7fafd 60%, #e3f0ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* أضف هذا السطر */
+    gap: 8px; /* أضف مسافة بين العناصر */
+    box-shadow: 0 2px 8px #0001;
+    transition: box-shadow 0.18s, background 0.18s;
+    font-size: 1.25em;
+}
+.folder:hover {
+    box-shadow: 0 4px 16px #1976d222;
+    background: linear-gradient(90deg, #e3f0ff 60%, #f7fafd 100%);
+}
+.folder-name {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.22em;
+    color: #1976d2;
+    transition: color 0.2s;
+    min-width: 0; /* أضف هذا السطر */
+    word-break: break-word; /* أضف هذا السطر */
+    flex: 1 1 180px; /* أضف هذا السطر لجعل الاسم يأخذ مساحة مرنة */
+    max-width: 100%;
+    overflow-wrap: anywhere; /* أضف هذا السطر */
+}
+.folder-name:hover {
+    color: #0d47a1;
+}
+.actions {
+    display: flex;
+    flex-wrap: wrap; /* أضف هذا السطر */
+    gap: 6px; /* أضف مسافة بين الأزرار */
+    align-items: center;
+    margin-top: 6px;
+}
+.actions button {
+    margin-left: 4px;
+}
+#new-folder-btn, #add-video-btn, #add-file-btn {
+    margin-bottom: 0;
+    background: linear-gradient(90deg, #1976d2 60%, #2196f3 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 32px;
+    font-size: 1.25em;
+    font-weight: bold;
+    box-shadow: 0 2px 8px #1976d222;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+#new-folder-btn.red-btn {
+    background: linear-gradient(90deg, #e53935 60%, #ff5252 100%) !important;
+    color: #fff !important;
+}
+#new-folder-btn:hover, #add-video-btn:hover, #add-file-btn:hover {
+    background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
+    box-shadow: 0 4px 16px #1976d244;
+}
+button {
+    background: #f5f7fa;
+    color: #1976d2;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 1.18em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+    box-shadow: 0 1px 4px #1976d211;
+}
+button:hover {
+    background: #e3f0ff;
+    color: #0d47a1;
+    box-shadow: 0 2px 8px #1976d122;
+}
+input, textarea, select {
+    font-family: inherit;
+    direction: inherit;
+    unicode-bidi: inherit;
+    border: 1.5px solid #e3eaf2;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 1.18em;
+    background: #f7fafd;
+    transition: border 0.18s, box-shadow 0.18s;
+    outline: none;
+    margin-top: 4px;
+}
+input:focus, textarea:focus, select:focus {
+    border: 1.5px solid #1976d2;
+    box-shadow: 0 2px 8px #1976d122;
+    background: #fff;
+}
+textarea {
+    resize: vertical;
+}
+label {
+    font-size: 1.18em;
+    color: #1976d2;
+    font-weight: 500;
+}
+/* Loader styles */
+#loader {
+    display: none;
+    margin: 24px auto;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+/* كارت الكورس */
+.course-card {
+    background: linear-gradient(135deg, #f7fafd 60%, #e3f0ff 100%);
+    border-radius: 24px; /* زيادة الحواف الدائرية */
+    border: 2px solid #e3eaf2; /* إضافة إطار صغير للفصل */
+    box-shadow: 0 4px 16px #1976d211, 0 1.5px 4px #2196f322;
+    margin: 30px auto; /* فاصل علوي وسفلي وجانبي */
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    min-width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+    /* زيادة ارتفاع الكارت */
+    min-height: 420px;
+    font-size: 1.25em;
+    position: relative;
+    transition: box-shadow 0.18s, background 0.18s;
+    border: none;
+}
+.course-card:hover {
+    box-shadow: 0 8px 32px #1976d222;
+    background: linear-gradient(135deg, #e3f0ff 60%, #f7fafd 100%);
+}
+.course-card-img {
+    width: 100vw;
+    min-width: 100vw;
+    max-width: 100vw;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 2px 8px #1976d111;
+    background: #e3f0ff;
+    margin: 0;
+}
+.course-card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #1976d2cc;
+    color: #fff;
+    border-radius: 8px;
+    padding: 3px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 1px 4px #1976d122;
+}
+.course-card-body {
+    padding: 18px 18px 10px 18px;
+}
+.course-card-title {
+    font-size: 1.45em;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #1976d2;
+    letter-spacing: 0.2px;
+}
+.course-card-desc {
+    color: #444;
+    font-size: 1.18em;
+    margin-bottom: 12px;
+    min-height: 44px;
+}
+.course-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px 22px 28px;
+    font-size: 1.15em;
+}
+.course-card-instructor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.13em;
+    color: #1976d2;
+}
+.course-card-instructor-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e3eaf2;
+    box-shadow: 0 1px 4px #1976d122;
+    background: #fff;
+}
+.course-card-price {
+    color: #2196f3;
+    font-weight: bold;
+    font-size: 1.25em;
+    letter-spacing: 0.2px;
+}
+.course-card-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 0 28px 22px 28px;
+}
+.course-card-actions button {
+    background: #f5f7fa;
+    color: #1976d2;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1.13em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+    box-shadow: 0 1px 4px #1976d111;
+}
+.course-card-actions button:hover {
+    background: #e3f0ff;
+    color: #0d47a1;
+    box-shadow: 0 2px 8px #1976d122;
+}
+/* عدادات الفيديوهات والملفات داخل الكارت أو المجلد الفرعى */
+.course-card-body .folder-counts,
+.subfolder .folder-counts {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 8px 0 0 0;
+    font-size: 1.08em;
+}
+.folder-counts span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 7px;
+    padding: 2px 10px 2px 8px;
+    font-weight: 500;
+    font-family: inherit;
+}
+.folder-counts .videos-count {
+    color: #e53935;
+    background: #ffebee;
+}
+.folder-counts .files-count {
+    color: #ff6f00;
+    background: #fffde7;
+}
+.folder-counts .icon {
+    font-size: 1.2em;
+    margin-left: 2px;
+    margin-right: 0;
+}
+
+/* للمجلدات الفرعية */
+.subfolder .folder-counts {
+    gap: 10px;
+    font-size: 0.98em;
+    margin: 6px 0 0 0;
+}
+.subfolder .folder-counts span {
+    border-radius: 6px;
+    padding: 1px 8px 1px 6px;
+    font-weight: 500;
+}
+.subfolder .folder-counts .icon {
+    font-size: 1.1em;
+}
+/* أضف هذا السطر لتصفير المسافة بين اسم المجلد ومعلوماته */
+.subfolder .folder-name + div {
+    margin-top: 0 !important;
+}
+.sort-row {
+    transition: background 0.18s, opacity 0.18s;
+}
+.sort-row:active {
+    opacity: 0.5;
+    background: #e3f0ff;
+}
+@media (max-width: 900px) {
+    #container {
+        padding: 16px 0 16px 0;
+    }
+    .course-card {
+        min-height: 340px;
+        font-size: 1.13em;
+    }
+    .course-card-img {
+        height: 220px;
+    }
+}
+@media (max-width: 600px) {
+    #container {
+        padding: 0;
+        border-radius: 0;
+        margin: 0;
+        width: 100vw;
+        min-height: 100vh;
+    }
+    .course-card {
+        min-height: 340px;
+        font-size: 1.13em;
+    }
+    .course-card-img {
+        height: 220px;
+    }
+    .course-card-body, .course-card-footer, .course-card-actions {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .course-card-title {
+        font-size: 1.18em;
+    }
+    .course-card-desc {
+        font-size: 1.08em;
+        min-height: 36px;
+    }
+    .course-card-instructor {
+        font-size: 1.08em;
+        gap: 8px;
+    }
+    .course-card-instructor-img {
+        width: 32px;
+        height: 32px;
+    }
+    .course-card-price {
+        font-size: 1.08em;
+    }
+    .course-card-actions button {
+        font-size: 1.08em;
+        padding: 8px 14px;
+    }
+    .folder {
+        padding: 16px 8px;
+        font-size: 1.13em;
+    }
+    #folders {
+        gap: 16px;
+        padding: 0;
+        margin: 0;
+    }
+    #breadcrumb {
+        font-size: 1.13em;
+        padding: 10px 8px;
+        margin-bottom: 14px;
+    }
+    #new-folder-btn, #add-video-btn, #add-file-btn {
+        padding: 12px 18px;
+        font-size: 1.13em;
+        border-radius: 10px;
+    }
+    button {
+        font-size: 1.13em;
+        padding: 10px 16px;
+        border-radius: 10px;
+    }
+    input, textarea, select {
+        font-size: 1.13em;
+        padding: 12px 12px;
+        border-radius: 10px;
+    }
+}
+@media (max-width: 500px) {
+    .course-card { 
+        min-height: 260px;
+        font-size: 1.08em;
+    }
+    .course-card-img {
+        height: 160px;
+    }
+    .course-card-title {
+        font-size: 1.08em;
+    }
+    .course-card-desc {
+        font-size: 1em;
+        min-height: 28px;
+    }
+    .course-card-instructor-img {
+        width: 24px;
+        height: 24px;
+    }
+    .course-card-footer {
+        padding-bottom: 10px;
+    }
+    .course-card-actions {
+        padding-bottom: 10px;
+        gap: 6px;
+    }
+    .course-card-actions button {
+        font-size: 1em;
+        padding: 7px 10px;
+    }
+    .folder {
+        padding: 10px 2px;
+        font-size: 1em;
+    }
+}
+@media (max-width: 400px) {
+    .course-card-img {
+        height: 110px;
+    }
+    .course-card-title, .course-card-desc, .course-card-instructor, .course-card-price {
+        font-size: 1em;
+    }
+}
+input, textarea, button, select {
+    font-family: inherit;
+    direction: inherit;
+    unicode-bidi: inherit;
+}
+.course-card-title, .course-card-desc, .course-card-instructor, .course-card-price {
+    font-family: inherit;
+    direction: inherit;
+    unicode-bidi: inherit;
+}
+/* Modal styles */
+#modal-bg {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: #0007;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+#modal {
+    background: #fff;
+    padding: 28px 22px 18px 22px;
+    border-radius: 16px;
+    max-width: 370px;
+    margin: 80px auto;
+    position: relative;
+    box-shadow: 0 4px 24px #1976d222, 0 1.5px 4px #2196f322;
+    animation: modalIn 0.22s;
+    /* أضف التالي لجعل الإطار لا يتعدى الشاشة */
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+@keyframes modalIn {
+    from { transform: scale(0.95) translateY(30px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+#modal-title {
+    margin-top: 0;
+    text-align: center;
+    color: #1976d2;
+    font-size: 1.25em;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+}
+#modal-form button[type="submit"] {
+    background: linear-gradient(90deg, #1976d2 60%, #2196f3 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 22px;
+    font-size: 1em;
+    font-weight: bold;
+    margin-left: 8px;
+    box-shadow: 0 2px 8px #1976d222;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+#modal-form button[type="submit"]:hover {
+    background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
+    box-shadow: 0 4px 16px #1976d244;
+}
+#modal-form button[type="button"] {
+    background: #f5f7fa;
+    color: #1976d2;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 22px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+#modal-form button[type="button"]:hover {
+    background: #e3f0ff;
+    color: #0d47a1;
+}
+#img-preview-modal, #instructor-img-preview-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: #000b;
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    animation: modalIn 0.22s;
+}
+#img-preview, #instructor-img-preview {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px #0008;
+    background: #fff;
+}
+#instructor-img-preview {
+    max-width: 60vw;
+    max-height: 60vh;
+    border-radius: 50%;
+}
+#img-preview-modal span, #instructor-img-preview-modal span {
+    position: absolute;
+    top: 18px;
+    left: 24px;
+    font-size: 2em;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2010;
+    background: #1976d2cc;
+    border-radius: 50%;
+    padding: 2px 12px;
+    transition: background 0.18s;
+}
+#img-preview-modal span:hover, #instructor-img-preview-modal span:hover {
+    background: #0d47a1cc;
+}
+/* Auth container styles */
+#auth-container {
+    max-width: 420px;
+    margin: 60px auto;
+    font-family: inherit;
+    direction: inherit;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #1976d222, 0 1.5px 4px #2196f322;
+    padding: 28px 22px 18px 22px;
+}
+#auth-container h3 {
+    text-align: center;
+    color: #1976d2;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+#auth-container button {
+    background: linear-gradient(90deg, #1976d2 60%, #2196f3 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 22px;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-left: 8px;
+    box-shadow: 0 2px 8px #1976d222;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+#auth-container button:hover {
+    background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
+    box-shadow: 0 4px 16px #1976d244;
+}
+#auth-container form {
+    margin-bottom: 0;
+}
+#auth-error {
+    color: #e53935;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1em;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    background: #e3f0ff;
+}
+::-webkit-scrollbar-thumb {
+    background: #b3c6e7;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #1976d2;
+}
+/* مظهر مميز للمجلدات الفرعية */
+.subfolder {
+    background: linear-gradient(90deg, #e3f0ff 60%, #bbdefb 100%);
+    border: 2px solid #1976d2;
+    box-shadow: 0 4px 16px #1976d244;
+    font-size: 1.35em;
+    /* تعديل الحجم ليطابق الفيديو/الملف */
+    padding: 18px 28px; /* كان 28px 36px */
+    border-radius: 20px;
+    min-height: unset; /* كان 70px، الآن بدون ارتفاع ثابت */
+    transition: box-shadow 0.18s, background 0.18s, border 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.subfolder:hover {
+    background: linear-gradient(90deg, #bbdefb 60%, #e3f0ff 100%);
+    box-shadow: 0 8px 32px #1976d244;
+    border-color: #0d47a1;
+}
+.subfolder .folder-name {
+    font-size: 1.22em;
+    color: #0d47a1;
+}
+
+/* مظهر مميز للملفات */
+.file-item {
+    background: linear-gradient(90deg, #fffde7 60%, #ffe082 100%);
+    border: 2px solid #ffb300;
+    box-shadow: 0 4px 16px #ffb30033;
+    font-size: 1.35em;
+    padding: 28px 36px;
+    border-radius: 20px;
+    min-height: 70px;
+    transition: box-shadow 0.18s, background 0.18s, border 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.file-item:hover {
+    background: linear-gradient(90deg, #ffe082 60%, #fffde7 100%);
+    box-shadow: 0 8px 32px #ffb30044;
+    border-color: #ff6f00;
+}
+.file-item .folder-name {
+    color: #ff6f00;
+}
+
+/* مظهر مميز للفيديوهات */
+.video-item {
+    background: linear-gradient(90deg, #ffebee 60%, #ff8a80 100%);
+    border: 2px solid #e53935;
+    box-shadow: 0 4px 16px #e5393533;
+    font-size: 1.35em;
+    padding: 28px 36px;
+    border-radius: 20px;
+    min-height: 70px;
+    transition: box-shadow 0.18s, background 0.18s, border 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.video-item:hover {
+    background: linear-gradient(90deg, #ff8a80 60%, #ffebee 100%);
+    box-shadow: 0 8px 32px #e5393544;
+    border-color: #b71c1c;
+}
+.video-item .folder-name {
+    color: #e53935;
+}
+
+/* لم تعد هناك حاجة لـ .item-type-icon إذا لم تُستخدم */
+@media (max-width: 600px) {
+    /* ...existing code... */
+    .file-item, .video-item, .subfolder {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 12px 6px; /* كان 16px 8px */
+        font-size: 1.13em;
+        min-height: unset;
+    }
+}
+.folder-name a {
+    text-decoration: none !important;
+}
+
+/* تعطيل pointer-events على iframe داخل مشغل Plyr فقط */
+.plyr__video-embed iframe {
+    pointer-events: none;
+}
+
+/* إعادة تفعيل pointer-events لعناصر التحكم الخاصة بـ Plyr */
+.plyr__controls,
+.plyr__control,
+.plyr__menu,
+.plyr__menu__container,
+.plyr__progress,
+.plyr__time,
+.plyr__volume,
+.plyr__tooltip,
+.plyr__captions,
+.plyr__poster,
+.plyr__ads,
+.plyr__preview-thumb,
+.plyr__preview-scrubbing {
+    pointer-events: auto;
+}
+
+/* دائرة تحميل صغيرة */
+.mini-loader {
+    border: 3px solid #e3eaf2;
+    border-top: 3px solid #1976d2;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+@media (max-width: 600px) {
+    .mini-loader {
+        width: 18px;
+        height: 18px;
+        border-width: 3px;
+    }
+}
+
+/* شريط البحث داخل إطار النقل */
+#move-modal-search {
+    font-family: 'Cairo', 'Tajawal', 'Segoe UI', Arial, sans-serif;
+    direction: rtl;
+    border: 1.5px solid #e3eaf2;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 1.08em;
+    margin-bottom: 4px;
+    background: #f7fafd;
+    transition: border 0.18s, box-shadow 0.18s;
+    outline: none;
+}
+#move-modal-search:focus {
+    border: 1.5px solid #1976d2;
+    box-shadow: 0 2px 8px #1976d122;
+    background: #fff;
+}
